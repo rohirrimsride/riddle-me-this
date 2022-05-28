@@ -1,3 +1,14 @@
-* {
+html {
     background-color: #0f3338fb;
+    color: darkgrey;
+}
+
+body {
+    font-family: fantasy;
+}
+
+.head {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
