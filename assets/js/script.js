@@ -1,5 +1,40 @@
-// build a javascript variable list to connect with html element classes
-var 
+// build a javascript variable list to connect with html element id's
+questionCardEl = document.querySelector("question-card");
+// create a customizable array of high scores
+var questionIdCounter = 0;
+var highScores = [];
+
+
+// display new questions
+
+// create html <li> elements using the choices class inside the <ul> element
+var createQuestionEl = function() {
+    // creates a h3 element used to display the question
+    var questionEl = document.createElement("h3");
+    questionEl.className = "question";
+    questionEl.setAttribute("question-id", questionIdCounter);
+
+    // create a ul element with li innerhtml element that holds the answer options
+    var answerOptionsEl = document.createElement ("ul");
+    answerOptionsEl.className = "options-holder";
+    
+
+
+
+
+}   
+
+var saveScore = function() {
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+};
+
+var loadScore = function() {
+
+}
+
+// create a highscores display page
+
+// create a countdown timer
 
 // build an array of questions and answers
 var quizQuestions = [
@@ -32,14 +67,14 @@ var quizQuestions = [
         answer: "b"
     },
     {
-        question: "How do you create a function in JavaScript?",
+        question: "Which one is NOT a datatype?",
         options: {
-            a: "myFunction ();",
-            b: "function myFunction ()",
-            c: "function = myFunction()",
-            d: "function (myFunction)"
+            a: "Boolean",
+            b: "string",
+            c: "variable",
+            d: "array"
         },
-        answer: "b"
+        answer: "c"
     },
     {
         question: "How do you add a comment in JavaScript?",
@@ -70,14 +105,14 @@ var quizQuestions = [
         answer: "c"
     },
     {
-        question: "Which one is NOT a datatype?",
+        question: "How do you create a function in JavaScript?",
         options: {
-            a: "Boolean",
-            b: "string",
-            c: "variable",
-            d: "array"
+            a: "myFunction ();",
+            b: "function myFunction ()",
+            c: "function = myFunction()",
+            d: "function (myFunction)"
         },
-        answer: "c"
+        answer: "b"
     },
     {
         question: "Is JavaScript case sensitive?",
@@ -97,13 +132,4 @@ var quizQuestions = [
         },
         answer: "a"
     }
-]
-// display new questions
-
-// create html <li> elements using the choices class inside the <ul> element
-
-// create a customizable array of high scores
-
-// create a highscores display
-
-// create a countdown timer
+];

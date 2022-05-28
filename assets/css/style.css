@@ -1,14 +1,21 @@
 html {
     background-color: #0f3338fb;
-    color: darkgrey;
+    color: rgb(255, 249, 162);
+    height: 100vh;
 }
 
 body {
-    font-family: fantasy;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .head {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
