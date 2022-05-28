@@ -1,6 +1,6 @@
 html {
-    background-color: #0f3338fb;
-    color: rgb(255, 249, 162);
+    background-color: #fffffffb;
+    color: rgb(70, 29, 117);
     height: 100vh;
 }
 
@@ -12,6 +12,10 @@ body {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+}
+
+.score-text:link {
+    text-decoration: none;
 }
 
 footer {

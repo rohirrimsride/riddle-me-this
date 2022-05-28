@@ -1,11 +1,35 @@
 // build a javascript variable list to connect with html element id's
-questionCardEl = document.querySelector("question-card");
+questionCardEl = document.querySelector("#question-card");
 // create a customizable array of high scores
 var questionIdCounter = 0;
 var highScores = [];
 
 
 // display new questions
+
+// starting page with start button
+var quizStartPage = function() {
+    // creates quiz title
+    var quizTitle = document.createElement("h2");
+    quizTitle.className = ("quiz-title");
+    quizTitle.textContent = "Riddle Me This - Coding Quiz Challenge";
+    questionCardEl.appendChild(quizTitle);
+
+    // welcome challenge and quiz parameters
+    var quizParameters = document.createElement("p");
+    quizParameters.className = ("quiz-info");
+    quizParameters.textContent = "Multiple choice quiz.  Each correct answer adds 5 points to your score.  Each wrong answer subtracts 5 seconds from your time.  Have fun!!!";
+    questionCardEl.appendChild(quizParameters);
+
+    // quiz start button
+    var quizStartBtn = document.createElement("button");
+    quizStartBtn.className = "start-quiz"
+    quizStartBtn.textContent = "Start Quiz"
+    questionCardEl.appendChild(quizStartBtn);
+
+    // start quiz function
+
+};
 
 // create html <li> elements using the choices class inside the <ul> element
 var createQuestionEl = function() {
@@ -17,7 +41,8 @@ var createQuestionEl = function() {
     // create a ul element with li innerhtml element that holds the answer options
     var answerOptionsEl = document.createElement ("ul");
     answerOptionsEl.className = "options-holder";
-    
+    answerOptionsEl.innerHTML = "li class"
+
 
 
 
@@ -133,3 +158,5 @@ var quizQuestions = [
         answer: "a"
     }
 ];
+
+quizStartPage ();
