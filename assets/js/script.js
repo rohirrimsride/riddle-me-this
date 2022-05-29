@@ -24,7 +24,8 @@ var quizStartPage = function() {
     // welcome challenge and quiz parameters
     var quizParameters = document.createElement("p");
     quizParameters.className = ("quiz-info");
-    quizParameters.textContent = "Multiple choice quiz.  Each correct answer adds 5 points to your score.  Each wrong answer subtracts 5 seconds from your time.  Have fun!!!";
+    quizParameters.textContent = "Multiple choice quiz.  Each correct answer adds 5 points to your score. \r\n " 
+    quizParameters.textContent += "Each wrong answer subtracts 5 seconds from your time.  Have fun!!!";
     questionCardEl.appendChild(quizParameters);
 
     // quiz start button

@@ -1,25 +1,70 @@
 html {
     background-color: #fffffffb;
-    color: rgb(70, 29, 117);
+    color: #461d75;
     height: 100vh;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-
+/* begin header section */
 .head {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    height: 10vh;
 }
 
 .score-text:link {
     text-decoration: none;
 }
+/* end header section */
 
+/* begin question card section */
+.question-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50vh;
+}
+
+/* quiz start page section */
+.quiz-title {
+    display: flex;
+    height: 33%;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.quiz-info  {
+    font-size: 150%;
+    white-space: pre-line;
+    height: 20%;
+}
+
+.start-quiz {
+    background-color: #461d75;
+    color: #fffffffb;
+    height: 5%;
+    width: 10%;
+    border-radius: 10px;
+    border-color: #461d75;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+/* end quiz start page section */
+/* end question card section */
 footer {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    height: 10vh;
+}
+
+.quote2 {
+    margin-top: 0%;
+    padding-top: 1%;
+    width: 50%;
+    border-top: 2px solid #461d75;
+    text-align: center;
 }
