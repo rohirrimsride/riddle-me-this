@@ -1,6 +1,6 @@
 // build a javascript variable list to connect with html element id's
 var questionCardEl = document.querySelector("#question-card");
-
+var countDownTimer = document.getElementById("time");
 // var subtractTime = countDownTimer
 // create a customizable array of high scores and quizTaker variable to track score during quiz
 var highScores = [];
@@ -40,61 +40,60 @@ var quizStartPage = function() {
         questionCardEl.removeChild(quizParameters);
         questionCardEl.removeChild(quizStartBtn);
         createQuestionEl();
-        startCountDown();
+            
+            const startingSeconds = 1;
+            let time = startingSeconds * 60;
+            setInterval(startCountDown, 1000);
+
+            function startCountDown() {
+                // var minutes = Math.floor(time / 60);
+                let seconds = time % 61;
+
+                countDownTimer.innerHTML = ("Time: " + seconds);
+                time--;
+                if (seconds <= 0) {
+                    stop(startCountDown);
+                    endQuiz(seconds);
+                    
+                
+                }
+                
+            };
     };
 };   
 
-// function startCountDown() {
-// document.getElementById("start-quiz").addEventListener("click", function(){
-//     var timeleft = 60;
-
-//     var downloadTimer = setInterval(function function1(){
-//     document.getElementById("time").innerHTML = timeleft + 
-//     " "+"seconds remaining";
-
-//     timeleft -= 1;
-//     if(timeleft <= 0){
-//         clearInterval(downloadTimer);
-//         document.getElementById("time").innerHTML = "Time is up!"
-//     }
-//     }, 1000);
-
-//     console.log(timeleft);
-// });
-// };
-// timer function
 
 
-var countDownTimer = document.getElementById("time");
 
-// function startCountDown(click, continueCountDown) {
+
 
 // const startingSeconds = 1;
 // let time = startingSeconds * 60;
 // setInterval(startCountDown, 1000);
 
-//     function continueCountDown() {
-//         // var minutes = Math.floor(time / 60);
-//         let seconds = time % 61;
+// function startCountDown() {
+//     // var minutes = Math.floor(time / 60);
+//     let seconds = time % 61;
 
-//         countDownTimer.innerHTML = ("Time: " + seconds);
-//         time--;
-        
-//         if (seconds === 0) {
-//             endQuiz(seconds);
-//             clearTimeout(seconds);
-//             return true;
-//         }
-        
-//     };
-// };
-// create html <li> elements using the choices class inside the <ul> element
-var createQuestionEl = function() {
+//     countDownTimer.innerHTML = ("Time: " + seconds);
+//     time--;
     
+//     if (seconds === 0) {
+//         endQuiz(seconds);
+//         clearTimeout(seconds);
+//         return true;
+//     }
+    
+// };
+
+// create question and answer option elements
+var createQuestionEl = function() {
+    // debugger;
     // creates a h3 element used to display the question
     // iterates through the quizQuestions array   
+
     for (var i = 0; i < quizQuestions.length; i++) {
-        
+    
         var questionEl = document.createElement("h3");
         questionEl.className = "question";
         questionEl.textContent = (quizQuestions[i].question);
@@ -117,7 +116,7 @@ var createQuestionEl = function() {
                 answerOptionsBtnA.textContent = (quizQuestions[i].a);
                 answerOptionsBtnA.setAttribute("id", "a");
                 answerOptionsEl.appendChild(answerOptionsBtnA);
-                // answerOptionsBtnA.addEventListener("click", checkAnswer);
+                // answerOptionsBtnA.onclick = function() {
 
                 answerOptionsBtnB = document.createElement("button");
                 answerOptionsBtnB.className = "option-btn";
@@ -145,24 +144,19 @@ var createQuestionEl = function() {
                 } else {
                     answerOptionsEl.appendChild(answerOptionsBtnD);
                     // answerOptionsBtnD.addEventListener("click", checkAnswer);
-                }   
-    var button = document.getElementById("");
-    var selectedOption = button.addEventListener("click", checkAnswer);
-    // var selectedOption = questionCardEl.addEventListener("click", checkAnswer);   
-                
-            // if ()
-        // debugger;
-        // var selectedOption = getElementById()
-        // console.log(quizQuestions[i]);
-        console.log(selectedOption);
-        // checkAnswer(selectedOption, quizQuestions);   
-        // console.log(quizQuestions[i].answer);   
-        debugger;
+                }
+        
+        quizQuestions = quizQuestions[i];
+        answerOptionsEl.addEventListener("click", checkAnswer(quizQuestions))
+        console.log("click");
     };
 };
 
-var checkAnswer = function (selectedOption, quizQuestions) {
-    console.log(quizQuestions);
+var checkAnswer = function (event) {
+    console.log(quizQuestions.answer);
+    // event.target.getAttribute("id")
+    var selectedOption = event.target;
+    console.log(selectedOption);
     // setTimeout(selectedOption);
     // console.log(selectedOption);
 
@@ -170,7 +164,8 @@ var checkAnswer = function (selectedOption, quizQuestions) {
         quizTaker.score = Math.floor(quizTaker.score, quizTaker.score + 5);
         createQuestionEl();
         console.log(quizTaker.score);
-    } else if (selectedOption){ 
+    } else if (selectedOption != quizQuestions.answer) { 
+
         
     }
 // debugger;
