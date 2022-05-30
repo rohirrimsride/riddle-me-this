@@ -1,11 +1,8 @@
-html {
-    background-color: #fffffffb;
+body {
+    background-color: #dcf5f5;
     color: #461d75;
     height: 100vh;
     box-sizing: border-box;
-}
-
-body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 /* begin header section */
@@ -29,12 +26,59 @@ body {
     height: 50vh;
 }
 
+.question {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: #000000;
+    height: 33%;
+    width: 50%;
+    font-size: 200%;
+}
+
+.options-container {
+    height: 100%;
+    width: 50%;
+}
+.option-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: space-around;
+    font-size: 150%;
+    height: 75%;
+}
+
+.optionBtn {
+    border-style: none;
+    font-size: 90%;
+    border-color: #461d75;
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: left;
+    background-color: #461d75;
+    color: #fffffffb;
+    width: 50%;
+    height: 20%;
+}
+
+.optionBtn:hover, .start-quiz:hover {
+    background-color: #ce13ce;
+    border-color: #ce13ce;
+    box-shadow: #ce13ce;
+    appearance: none;
+}
+/* end question card section */
+
 /* quiz start page section */
 .quiz-title {
+    color: #000000;
+    font-size: 225%;
     display: flex;
-    height: 33%;
-    flex-direction: row;
+    justify-content: center;
     align-items: flex-end;
+    width: 50%;
+    height: 33%;
 }
 
 .quiz-info  {
@@ -46,14 +90,18 @@ body {
 .start-quiz {
     background-color: #461d75;
     color: #fffffffb;
-    height: 5%;
+    height: 10%;
     width: 10%;
     border-radius: 10px;
     border-color: #461d75;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 90%;
+    border-style: none;
 }
 /* end quiz start page section */
-/* end question card section */
+
+
+/* start footer section */
 footer {
     display: flex;
     flex-direction: column;
@@ -68,3 +116,8 @@ footer {
     border-top: 2px solid #461d75;
     text-align: center;
 }
+
+.quote1 {
+    text-align: center;
+}
+/* end footer section */

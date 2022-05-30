@@ -52,8 +52,8 @@ var quizStartPage = function() {
 
                 countDownTimer.innerHTML = ("Time: " + seconds);
                 time--;
-                if (seconds === 0) {
-                    stop(startCountDown);
+                if (seconds == 0) {
+                    countDownTimer.innerHTML = ("Time: Time's Up")
                     endQuiz();
                     
                 
@@ -65,7 +65,7 @@ var quizStartPage = function() {
 
 // create question and answer option elements
 var createQuestionEl = function() {
-    // debugger;
+    
     // creates a h3 element used to display the question
     // iterates through the quizQuestions array   
 
@@ -79,7 +79,7 @@ var createQuestionEl = function() {
         // console.log(questionEl);
         
         // debugger;
-        // create a div with an ol element with li element that holds the answer options       
+        // create a div with an ol element with li element that holds the answer button options       
         var answerOptionsHolder = document.createElement("div");
         answerOptionsHolder.className = "options-container";
         questionCardEl.appendChild(answerOptionsHolder);
@@ -93,14 +93,12 @@ var createQuestionEl = function() {
                 answerOptionsBtnA.textContent = (quizQuestions[i].a);
                 answerOptionsBtnA.setAttribute("id", "a");
                 answerOptionsEl.appendChild(answerOptionsBtnA);
-                // answerOptionsBtnA.onclick = function() {
 
                 answerOptionsBtnB = document.createElement("button");
                 answerOptionsBtnB.className = "optionBtn";
                 answerOptionsBtnB.textContent = (quizQuestions[i].b);
                 answerOptionsBtnB.setAttribute("id", "b");
                 answerOptionsEl.appendChild(answerOptionsBtnB);
-                // answerOptionsBtnB.addEventListener("click", checkAnswer);
 
                 answerOptionsBtnC = document.createElement("button");
                 answerOptionsBtnC.className = "optionBtn";
@@ -109,10 +107,8 @@ var createQuestionEl = function() {
                 if (!quizQuestions[i].c) {    
                 } else {
                     answerOptionsEl.appendChild(answerOptionsBtnC);
-                    // answerOptionsBtnC.addEventListener("click", checkAnswer);
                 }                
                 
-
                 answerOptionsBtnD = document.createElement("button");
                 answerOptionsBtnD.className = "optionBtn";
                 answerOptionsBtnD.textContent = (quizQuestions[i].d);
@@ -120,11 +116,14 @@ var createQuestionEl = function() {
                 if (!quizQuestions[i].d) {    
                 } else {
                     answerOptionsEl.appendChild(answerOptionsBtnD);
-                    // answerOptionsBtnD.addEventListener("click", checkAnswer);
+                }
+                if (i == quizQuestions.length) {
+                    
                 }
         // debugger;
         quizQuestions = quizQuestions[i];
-        answerOptionsEl.addEventListener("click", checkAnswer(quizQuestions))
+
+        questionCardEl.addEventListener("click", checkAnswer(quizQuestions))
         console.log("click");
     };
 };
@@ -142,23 +141,30 @@ var checkAnswer = function (event) {
         createQuestionEl();
         console.log(quizTaker.score);
     } else if (selectedOption != quizQuestions.answer) { 
-
-        
+        // remove 5 seconds from timer
+        countDownTimer - 5;
+        createQuestionEl();   
     }
 // debugger;
 };
 
 var endQuiz = function() {
     
-        var quizEndTitle = document.createElement("h2");
-        quizEndTitle.className = ("quiz-title");
-        quizEndTitle.textContent = "Time's Up";
-        questionCardEl.appendChild(quizEndTitle);
+    questionCardEl.removeChild();
+
+    var quizEndTitle = document.createElement("h2");
+    quizEndTitle.className = ("quiz-title");
+    quizEndTitle.textContent = "Time's Up";
+    questionCardEl.appendChild(quizEndTitle);
     
 };
 
 var saveScore = function() {
     localStorage.setItem("highScores", JSON.stringify(highScores));
+
+    var highScoreTitle = document.createElement("h3");
+        highScoreTitle.className = "question";
+        questionCardEl.appendChild(highScoreTitle);
 };
 
 var loadScore = function() {
