@@ -1,18 +1,16 @@
 // build a javascript variable list to connect with html element id's
 var questionCardEl = document.querySelector("#question-card");
 var countDownTimer = document.getElementById("time");
-// var subtractTime = countDownTimer
+var highScoresEl = document.getElementById("high-scores");
+
 // create a customizable array of high scores and quizTaker variable to track score during quiz
 var highScores = [];
 var quizTaker = {
     score: 0,
 }
 
-
-
 // display new questions
 // starting page with start quiz button
-// debugger;
 var quizStartPage = function() {
     // debugger;
     // creates quiz title
@@ -21,73 +19,70 @@ var quizStartPage = function() {
     quizTitle.textContent = "Riddle Me This - Coding Quiz Challenge";
     questionCardEl.appendChild(quizTitle);
 
-    // welcome challenge and quiz parameters
+    // welcome title and quiz parameters
     var quizParameters = document.createElement("p");
     quizParameters.className = ("quiz-info");
     quizParameters.textContent = "Multiple choice quiz.  Each correct answer adds 5 points to your score. \r\n " 
     quizParameters.textContent += "Each wrong answer subtracts 5 seconds from your time.  Have fun!!!";
     questionCardEl.appendChild(quizParameters);
 
-    // quiz start button
+    // create quiz start button
     var quizStartBtn = document.createElement("button");
     quizStartBtn.className = "start-quiz";
     quizStartBtn.setAttribute("id", "start-quiz");
+    quizStartBtn.setAttribute("onclick", "startCountDown()");
     quizStartBtn.textContent = "Start Quiz";
     questionCardEl.appendChild(quizStartBtn);
 
-    // click start button actions
+    // click start quiz button actions
     quizStartBtn.onclick = function() {
         questionCardEl.removeChild(quizTitle);
         questionCardEl.removeChild(quizParameters);
         questionCardEl.removeChild(quizStartBtn);
-        createQuestionEl();
-            
-            const startingSeconds = 1;
-            let time = startingSeconds * 60;
-            setInterval(startCountDown, 1000);
+        createQuestionEl();         
+        quizTimer();
+    };
+}; 
 
-            function startCountDown() {
-                // var minutes = Math.floor(time / 60);
-                let seconds = time % 61;
 
-                countDownTimer.innerHTML = ("Time: " + seconds);
-                time--;
-                if (seconds == 0) {
-                    countDownTimer.innerHTML = ("Time: Time's Up")
-                    endQuiz();
-                    
-                
-                }
-                
+// Timer (Unable to get it connected with the click of the start quiz button)
+function quizTimer(){
+    var totalTime = 99
+    var countdown = function(){
+        // console.log(totalTime);
+        countDownTimer.innerHTML = ("Time: " + totalTime);
+        totalTime--;
+            if(totalTime === -1){   
+                clearInterval(startCountDown);
+                endQuiz();
             };
     };
-};   
+    var startCountDown = setInterval(countdown, 1000);
+};
 
 // create question and answer option elements
 var createQuestionEl = function() {
     
     // creates a h3 element used to display the question
     // iterates through the quizQuestions array   
-
+    /* I don't think this is the best way to iterate through the question array, but I've been unable to find a better option*/
     for (var i = 0; i < quizQuestions.length; i++) {
-    
+        // Creates questions
         var questionEl = document.createElement("h3");
         questionEl.className = "question";
         questionEl.textContent = (quizQuestions[i].question);
         questionEl.setAttribute("id", "question-id");
-        questionCardEl.appendChild(questionEl);
-        // console.log(questionEl);
+        questionCardEl.appendChild(questionEl); 
         
-        // debugger;
-        // create a div with an ol element with li element that holds the answer button options       
+        // creates a div with an ul element with button element that holds the answer options       
         var answerOptionsHolder = document.createElement("div");
         answerOptionsHolder.className = "options-container";
         questionCardEl.appendChild(answerOptionsHolder);
-
+            // creates ul container for the buttons
             var answerOptionsEl = document.createElement("ul");
             answerOptionsEl.className = "option-list";
             answerOptionsHolder.appendChild(answerOptionsEl);
-
+                // creates answer options buttons
                 answerOptionsBtnA = document.createElement("button");
                 answerOptionsBtnA.className = "optionBtn";
                 answerOptionsBtnA.textContent = (quizQuestions[i].a);
@@ -118,13 +113,14 @@ var createQuestionEl = function() {
                     answerOptionsEl.appendChild(answerOptionsBtnD);
                 }
                 if (i == quizQuestions.length) {
-                    
+                    questionCardEl.removeChild(questionEl);
                 }
         // debugger;
         quizQuestions = quizQuestions[i];
 
-        questionCardEl.addEventListener("click", checkAnswer(quizQuestions))
-        console.log("click");
+        
+        // answerOptionsEl.addEventListener("click", checkAnswer())
+        // console.log("click");
     };
 };
 
@@ -138,40 +134,56 @@ var checkAnswer = function (event) {
 
     if (selectedOption == quizQuestions.answer) {
         quizTaker.score = Math.floor(quizTaker.score, quizTaker.score + 5);
+        var updatedScore
         createQuestionEl();
         console.log(quizTaker.score);
     } else if (selectedOption != quizQuestions.answer) { 
         // remove 5 seconds from timer
-        countDownTimer - 5;
+        var totalTime = totalTime - 5;
+        quizTimer(totalTime);
         createQuestionEl();   
+    } else {
+        
     }
-// debugger;
 };
 
 var endQuiz = function() {
-    
-    questionCardEl.removeChild();
 
     var quizEndTitle = document.createElement("h2");
     quizEndTitle.className = ("quiz-title");
     quizEndTitle.textContent = "Time's Up";
     questionCardEl.appendChild(quizEndTitle);
+    debugger;
+    saveScore();
     
 };
 
 var saveScore = function() {
+
+
     localStorage.setItem("highScores", JSON.stringify(highScores));
 
-    var highScoreTitle = document.createElement("h3");
-        highScoreTitle.className = "question";
-        questionCardEl.appendChild(highScoreTitle);
+    var playerScoreTitle = document.createElement("h3");
+        playerScoreTitle.className = "question";
+        playerScoreTitle.textContent = "Your score is " + quizTaker.score;
+        questionCardEl.appendChild(playerScoreTitle);
 };
 
 var loadScore = function() {
     localStorage.getItem("highScores", JSON.parse(highScores));
 };
 
-// create a highscores display page
+// create on high-scores-index.html
+var highScoresPage = function(event){
+
+    var displayHighScores = event.target;
+    if (displayHighScores == click){
+        questionCardEl = document.createElement("h3");
+        questionCardEl.className = "question";
+        questionCardEl.textContent = "High Scores";
+    }
+    // print array of high scores
+};
 
 // build an array of questions and answers
 var quizQuestions = [
@@ -271,9 +283,9 @@ var quizQuestions = [
     }
 ];
 // add event listener in the parent element of createElement additions to listen for clicks on the list elements
-// questionCardEl.addEventListener("click", checkAnswer);
+questionCardEl.addEventListener("click", checkAnswer);
+highScoresEl.addEventListener("click", highScoresPage);
 
 // initial quiz loading page
 quizStartPage ();
 // debugger;
-
